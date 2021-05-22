@@ -28,14 +28,14 @@ object GetTaxi {
   }
 
   def displayDriversList(drivers: RDD[Driver], countDrivers: Long): Unit ={
-    println("\nDrivers List: " + countDrivers)
+    println("\nDrivers List (" + countDrivers + " drivers):")
     drivers.sortBy(driver => driver.driverID, true)
       .foreach(driver => println("Driver " + driver.driverID + ": " + driver.driverName + ", " +
         driver.address + ", " + driver.email))
   }
 
   def displayTripsList(trips: RDD[Trip], countTrips: Long): Unit = {
-    println("\nTrips List: " + countTrips)
+    println("\nTrips List (" + countTrips + " trips):")
     trips.sortBy(trip => trip.driverID,true)
       .foreach(trip => println("Trip: " + trip.driverID + ", " + trip.city + ", " + trip.distance + ", " + trip.tripDate))
   }
@@ -48,8 +48,8 @@ object GetTaxi {
     println("\nTotal distance of trips by city: " + sum)
   }
 
-  def displayTopNDrivers(topNDrivers: Array[(Int, (String, Int))]): Unit ={
-    println("\nTop Drivers List ")
+  def displayTopNDrivers(topN: Int, tripDate: LocalDate, topNDrivers: Array[(Int, (String, Int))]): Unit ={
+    println("\nTop " + topN + " Drivers List with max total kilometers on " + tripDate.toString)
     topNDrivers.foreach(driver => println(driver._2._1 + " (" + driver._1 +"): " + driver._2._2 + " Km"))
   }
 }

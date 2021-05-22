@@ -24,14 +24,22 @@ object MainGetTaxi {
     val drivers: RDD[Driver] = driversRDD.map(driverRec => driverRec.getDriver(","))
     val trips: RDD[Trip] = tripsRDD.map(tripRec => tripRec.getTrip(" "))
 
-    val countTripsByCityAndDistance = GetTaxi.countTripsByCityAndDistance(trips, "boston", "=", 10, ">")
-    val sumDistanceByCity = GetTaxi.sumDistanceByCity(trips, "boston", "=")
-    val topNDrivers = GetTaxi.getTopNDriversByOrderedByLongestDistance(drivers, trips, 3, LocalDate parse "2016-02-17", false)
+    val city =  "boston"
+    val cityFilter = "="
+    val distance = 10
+    val distanceFilter = ">"
+    val dateFilter = LocalDate parse "2016-02-17"
+    val topN = 3
+    val sortByAsc = false
+
+    val countTripsByCityAndDistance = GetTaxi.countTripsByCityAndDistance(trips, city, cityFilter, distance, distanceFilter)
+    val sumDistanceByCity = GetTaxi.sumDistanceByCity(trips, city, cityFilter)
+    val topNDrivers = GetTaxi.getTopNDriversByOrderedByLongestDistance(drivers, trips, topN,  dateFilter, sortByAsc)
 
     GetTaxi.displayDriversList(drivers, GetTaxi.countDrivers(drivers))
     GetTaxi.displayTripsList(trips, GetTaxi.countTrips(trips))
     GetTaxi.displayCountTripsByCityAndDistance(countTripsByCityAndDistance)
     GetTaxi.displaySumDistanceByCity(sumDistanceByCity)
-    GetTaxi.displayTopNDrivers(topNDrivers)
+    GetTaxi.displayTopNDrivers(topN, dateFilter, topNDrivers)
   }
 }

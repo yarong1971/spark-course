@@ -1,4 +1,4 @@
-package get_taxi.models
+package get_taxi_hw.get_taxi.models
 
 import java.time.{LocalDate}
 import java.util.Date

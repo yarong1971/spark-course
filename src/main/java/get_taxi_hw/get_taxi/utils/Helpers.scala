@@ -1,6 +1,6 @@
-package get_taxi.utils
+package get_taxi_hw.get_taxi.utils
 
-import get_taxi.models.{Driver, Trip}
+import get_taxi_hw.get_taxi.models.{Driver, Trip}
 import java.util
 import java.util.Locale
 import java.time.LocalDate
